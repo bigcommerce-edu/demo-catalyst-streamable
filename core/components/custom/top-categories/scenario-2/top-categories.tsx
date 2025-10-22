@@ -30,9 +30,12 @@ export async function TopCategories() {
   </>;
 }
 
-/**
- * Create the component `TopCategoriesSkeleton`.
- *  - Export the component so it can be used as the fallback for `<Suspense>`.
- *  - Use the same `<TopCategoriesContainer>` structure as the main component.
- *  - Make use of the built-in `<CardSkeleton>` component.
- */
+export function TopCategoriesSkeleton() {
+  return <>
+    <TopCategoriesContainer title="Top Categories">
+      <CardSkeleton />
+      <CardSkeleton />
+      <CardSkeleton />
+    </TopCategoriesContainer>
+  </>;
+}
