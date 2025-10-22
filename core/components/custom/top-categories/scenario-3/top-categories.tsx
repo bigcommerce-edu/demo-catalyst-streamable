@@ -7,16 +7,17 @@ import { CardSkeleton } from '~/vibes/soul/primitives/card';
 import { Suspense } from 'react';
 
 export async function TopCategories() {
-  /**
-   * Move the data fetching into the "inner" component, as the main component will now handle Suspense.
-   */
+  return <>
+    <Suspense fallback={<TopCategoriesSkeleton />}>
+      <TopCategoriesInner />
+    </Suspense>
+  </>;
+}
+
+async function TopCategoriesInner() {
   const customerAccessToken = await getSessionCustomerAccessToken();
   const categories = await getTopCategories(customerAccessToken);
 
-  /**
-   * Move the main implementation into the "inner" component.
-   * Instead, use `<Suspense>` here to wrap the "inner" component.
-   */
   return <>
     <TopCategoriesContainer title="Top Categories">
       {categories.map((category) => (
@@ -37,12 +38,6 @@ export async function TopCategories() {
     </TopCategoriesContainer>
   </>;
 }
-
-/**
- * Create the component `TopCategoriesInner`.
- *  - The component doesn't need to be exported.
- *  - The implementation previously in the main component will be here.
- */
 
 export function TopCategoriesSkeleton() {
   return <>
