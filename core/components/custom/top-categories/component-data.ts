@@ -33,6 +33,8 @@ const GetTopCategoriesQuery = graphql(`
 
 export const getTopCategories = cache(
   async (customerAccessToken?: string) => {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    
     const categoriesResult = await client.fetch({
       document: GetTopCategoriesQuery,
       customerAccessToken,
