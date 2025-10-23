@@ -3,40 +3,36 @@ import { TopCategoriesContainer } from '../top-categories-container';
 import { SubcategoryList } from '../subcategory-list';
 import { CardSkeleton } from '~/vibes/soul/primitives/card';
 import { Suspense } from 'react';
-import { getSessionCustomerAccessToken } from '~/auth';
-import { getTopCategories } from '../component-data';
 
-/**
- * Define a clean interface describing the expected category data structure.
- */
+interface Category {
+  entityId: number;
+  name: string;
+  path: string;
+  image: {
+    url: string;
+    altText: string;
+  } | null;
+  children?: Category[];
+}
 
-/**
- * Instead of handling data fetching within the component, receive a `categories` parameter.
- * This allows the component to be concerned only with the visual presentation, not how data was received.
- *  - `categories` should be of the type `Promise<Category[]>`
- */
-export async function TopCategories() {
-  /**
-   * Pass `categories` straight to the inner component.
-   */
+export async function TopCategories({ 
+  categories 
+}: {
+  categories: Promise<Category[]>;
+}) {
   return <>
     <Suspense fallback={<TopCategoriesSkeleton />}>
-      <TopCategoriesInner />
+      <TopCategoriesInner categories={categories} />
     </Suspense>
   </>;
 }
 
-/**
- * Add the same signature to the inner component.
- *  - Alias `categories` as `categoriesPromise`
- */
-async function TopCategoriesInner() {
-  /**
-   * Get rid of the direct data fetching.
-   *  - Now the `categoriesPromise` parameter can just be awaited.
-   */
-  const customerAccessToken = await getSessionCustomerAccessToken();
-  const categories = await getTopCategories(customerAccessToken);
+async function TopCategoriesInner({ 
+  categories: categoriesPromise 
+}: {
+  categories: Promise<Category[]>;
+}) {
+  const categories = await categoriesPromise;
 
   return <>
     <TopCategoriesContainer title="Top Categories">

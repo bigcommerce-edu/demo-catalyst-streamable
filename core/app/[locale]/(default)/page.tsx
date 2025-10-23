@@ -2,8 +2,8 @@ import { locales } from '~/i18n/locales';
 import { Page as MakeswiftPage } from '~/lib/makeswift';
 // import { TopCategoriesExample } from '~/components/custom/top-categories/scenario-1/server';
 // import { TopCategoriesExample } from '~/components/custom/top-categories/scenario-2/server';
-import { TopCategoriesExample } from '~/components/custom/top-categories/scenario-3/server';
-// import { TopCategoriesExample } from '~/components/custom/top-categories/scenario-4/server';
+// import { TopCategoriesExample } from '~/components/custom/top-categories/scenario-3/server';
+import { TopCategoriesExample } from '~/components/custom/top-categories/scenario-4/server';
 // import { TopCategoriesExample } from '~/components/custom/top-categories/scenario-5/server';
 // import { TopCategoriesExample } from '~/components/custom/top-categories/scenario-6/server';
 

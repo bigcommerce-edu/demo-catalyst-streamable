@@ -3,14 +3,10 @@ import { getTopCategories } from '../component-data';
 import { TopCategories } from './top-categories';
 
 export async function TopCategoriesExample() {
-  /**
-   * Perform the data fetch of top categories here in the context where `<TopCategories>` is rendered.
-   */
+  const customerAccessToken = await getSessionCustomerAccessToken();
+  const categories = getTopCategories(customerAccessToken);
 
-  /**
-   * Pass the fetched categories to the `<TopCategories>` component.
-   */
   return <>
-    <TopCategories />
+    <TopCategories categories={categories} />
   </>;
 }
